@@ -1,0 +1,78 @@
+﻿@model ClienteModel
+@{
+    ViewData["Title"] = "Editar cliente";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Alterar cliente</h1>
+</div>
+
+
+<form asp-controller="Cliente" asp-action="Editar" method="post">
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="cpf" class="form-label">CPF:</label>
+            <input type="text" asp-for="CPF" class="form-control">
+            @Html.ValidationMessageFor(x => x.CPF)
+        </div>
+
+        <div class="form-group col-md-4">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" asp-for="Nome" class="form-control">
+            @Html.ValidationMessageFor(x => x.Nome)
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="data" class="form-label">Data Nascimento:</label>
+            <input type="text" asp-for="DataNascimento" class="form-control">
+            @Html.ValidationMessageFor(x => x.DataNascimento)
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="nome" class="form-label">Sexo:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" asp-for="Sexo" value="M" checked>
+                <label class="form-check-label" for="gridSexoM">
+                    Masculino
+                </label>
+
+                <input class="form-check-input" type="radio" asp-for="Sexo" value="F" style="margin-left: 10px;">
+                <label class="form-check-label" for="gridSexoF" style="margin-left: 28px;">
+                    Feminino
+                </label>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label for="cep" class="form-label">CEP:</label>
+            <input type="text" asp-for="Cep" class="form-control" onblur="buscarCep()">
+            @Html.ValidationMessageFor(x => x.Cep)
+        </div>
+
+        <div class="col-md-4">
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input type="text" asp-for="Logradouro" class="form-control">
+            @Html.ValidationMessageFor(x => x.Logradouro)
+        </div>
+
+        <div class="col-md-2">
+            <label for="uf" class="form-label">UF:</label>
+            <input type="text" asp-for="UF" class="form-control">
+            @Html.ValidationMessageFor(x => x.UF)
+        </div>
+
+        <div class="col-md-4">
+            <label for="cidade" class="form-label">Cidade:</label>
+            <input type="text" asp-for="Cidade" class="form-control">
+            @Html.ValidationMessageFor(x => x.Cidade)
+        </div>
+
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Alterar</button>
+    <a class="btn btn-secondary btn-block" asp-action="Index" asp-controller="Cliente" role="button">Voltar</a>
+</form>

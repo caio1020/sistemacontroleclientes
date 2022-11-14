@@ -1,0 +1,76 @@
+﻿@model List<ClienteModel>
+@{
+    ViewData["Title"] = "Listagem de Clientes";
+}
+
+<div class="text-center">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" asp-controller="Cliente" asp-action="Criar" role="button">Adicionar novo cliente</a>
+    </div>
+
+    <br />
+
+    @if (TempData["MensagemSucesso"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemSucesso"]
+        </div>
+    }
+
+    @if (TempData["MensagemErro"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="btn btn-danger btn-sm close-alert" data-bs-dismiss="alert" aria-label="Close">X</button>
+            @TempData["MensagemErro"]
+        </div>
+    }
+
+    <br />
+
+    <h1 class="display-4">Listagem de clientes</h1>
+
+    <table id="table-cliente" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">CPF</th>
+                <th scope="col">Data Nasc.</th>
+                <th scope="col">UF</th>
+                <th scope="col">Cidade</th>
+                <th scope="col">Sexo</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var cliente in Model)
+                {
+                    <tr>
+                        <th scope="row">@cliente.Id</th>
+                        <td>@cliente.Nome</td>
+                        <td>@cliente.CPF</td>
+                        <td>@cliente.DataNascimento.ToString("dd/MM/yyyy")</td>
+                        <td>@cliente.UF</td>
+                        <td>@cliente.Cidade</td>
+                        <td>@cliente.Sexo</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" asp-action="Editar" asp-controller="Cliente" asp-route-id="@cliente.Id" class="btn btn-primary">Editar</a>
+                                <a role="button" asp-action="ApagarConfirmacao" asp-controller="Cliente" asp-route-id="@cliente.Id" class="btn btn-danger">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr class="odd"><td valign="top" colspan="5">Nenhum cliente encontrado</td></tr>
+            }
+        </tbody>
+    </table>
+
+</div>
